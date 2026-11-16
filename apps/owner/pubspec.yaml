@@ -1,0 +1,23 @@
+name: kiraya_owner
+description: Kiraya owner app
+publish_to: none
+version: 0.1.0+1
+resolution: workspace
+environment:
+  sdk: ^3.14.0
+dependencies:
+  flutter:
+    sdk: flutter
+  material_ui: ^1.11.1
+  kiraya_core:
+    path: ../../packages/core
+  image_picker: any
+  uuid: any
+  supabase_flutter: any
+  package_info_plus: any
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+flutter:
+  uses-material-design: true

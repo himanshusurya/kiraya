@@ -1,0 +1,8 @@
+name: kiraya_workspace
+publish_to: none
+environment:
+  sdk: ^3.14.0
+workspace:
+  - packages/core
+  - apps/owner
+  - apps/tenant

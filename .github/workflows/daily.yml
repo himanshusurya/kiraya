@@ -1,0 +1,21 @@
+name: daily
+
+# 06:00 IST every day: makes due draft bills, flags overdue ones (cron_daily).
+# Also keeps the free Supabase project from pausing after 7 idle days.
+on:
+  schedule:
+    - cron: '30 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run cron_daily
+        env:
+          URL: ${{ secrets.SUPABASE_URL }}
+          KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          curl -fsS -X POST "$URL/rest/v1/rpc/cron_daily" \
+            -H "apikey: $KEY" -H "Authorization: Bearer $KEY" \
+            -H "Content-Type: application/json" -d '{}'

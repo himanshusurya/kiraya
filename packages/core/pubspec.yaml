@@ -1,0 +1,23 @@
+name: kiraya_core
+description: Shared models, API client, plain-language English/Hindi strings and big-UI widgets for the Kiraya apps.
+version: 0.1.0
+publish_to: none
+resolution: workspace
+environment:
+  sdk: ^3.14.0
+dependencies:
+  flutter:
+    sdk: flutter
+  material_ui: ^1.11.1
+  supabase_flutter: any
+  http: any
+  intl: any
+  shared_preferences: any
+  url_launcher: any
+  package_info_plus: any
+  image_picker: any
+  qr_flutter: any
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0

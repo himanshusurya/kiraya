@@ -1,0 +1,36 @@
+# Flutter / Dart
+.dart_tool/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+*.iml
+.idea/
+.vscode/
+local.properties
+**/android/.gradle/
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/gradle/wrapper/gradle-wrapper.jar
+**/android/app/.cxx/
+GeneratedPluginRegistrant.*
+
+# Secrets - never commit
+**/android/key.properties
+*.jks
+*.keystore
+.env
+.env.*
+supabase/.temp/
+supabase/.branches/
+
+# Tests / tools
+node_modules/
+docs/build/
+*.apk
+
+# Office lock files
+~$*
+
+# Word export of docs/HLD.md (local only; may contain private details)
+docs/*.docx

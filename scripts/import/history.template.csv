@@ -1,0 +1,7 @@
+room,date,type,amount,mode,ref,note,cycle_start,cycle_end,rent,units,rate,other_label,other_amount
+# Lines starting with # are ignored. Dates: 2026-03-15 or 15/03/2026.
+101,01/03/2026,OPENING,1200,,,Old dues before March,,,,,,,
+101,15/03/2026,BILL,,,,,15/03/2026,14/04/2026,2500,45,12,Fan,420
+101,18/03/2026,PAYMENT,2000,CASH,,,,,,,,,
+101,20/03/2026,PAYMENT,1500,PHONEPE,T12345,,,,,,,,
+101,25/03/2026,ADJUSTMENT,-100,,,Discount for water problem,,,,,,,
