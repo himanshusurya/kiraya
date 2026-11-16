@@ -26,14 +26,18 @@ update themselves from GitHub Releases.
 
 ## One-time setup
 
-1. **Supabase**: create a free project (region Mumbai). Then, with the [Supabase CLI](https://supabase.com/docs/guides/cli):
+1. **Supabase**: create a [personal access token](https://supabase.com/dashboard/account/tokens), then run
+   `scripts\setup-supabase.ps1` (token in `SUPABASE_ACCESS_TOKEN` or a DPAPI file, see the script header). It creates
+   the free Mumbai project, turns off email confirmation and public sign-up, pushes migrations + seed, deploys
+   `manage-login`, and stores the `SUPABASE_*` GitHub secrets. Manual equivalent with the
+   [Supabase CLI](https://supabase.com/docs/guides/cli) (v3):
    ```sh
-   supabase init                          # once: creates supabase/config.toml (keep the existing folders)
    supabase link --project-ref <ref>
-   supabase db push --include-seed        # runs supabase/migrations + seed.sql (building, 16 rooms, default settings)
-   supabase functions deploy manage-login
+   supabase db push --remote --include-seed   # runs supabase/migrations + seed.sql (building, 16 rooms, default settings)
+   supabase functions deploy manage-login --use-api
    ```
-   In *Authentication → Providers → Email*, turn **off** "Confirm email" (logins are phone + PIN).
+   In *Authentication → Providers → Email*, turn **off** "Confirm email" (logins are phone + PIN) and disable sign-ups.
+   After deploy, set the building name/address in the `property` table and the UPI ID/name in the owner app's Settings.
 2. **Owner logins** (once per person):
    ```powershell
    .\scripts\create-owner.ps1 -Url https://<ref>.supabase.co -ServiceKey <service_role key> -Name "Papa" -Phone 98xxxxxxxx
