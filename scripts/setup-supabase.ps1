@@ -72,7 +72,7 @@ Push-Location $root
 try {
   & $Cli link --project-ref $ref --yes; if ($LASTEXITCODE) { throw 'supabase link failed' }
   & $Cli db push --remote --include-seed --password $dbPass --yes; if ($LASTEXITCODE) { throw 'supabase db push failed' }
-  & $Cli functions deploy manage-login --project-ref $ref --use-api --yes; if ($LASTEXITCODE) { throw 'functions deploy failed' }
+  & $Cli functions deploy manage-login --remote=$ref --use-api --yes; if ($LASTEXITCODE) { throw 'functions deploy failed' }
 }
 finally { Pop-Location; Remove-Item Env:SUPABASE_DB_PASSWORD -ErrorAction SilentlyContinue }
 
@@ -100,9 +100,9 @@ try {
 }
 finally { Remove-Item Env:GH_TOKEN -ErrorAction SilentlyContinue }
 
-# Smoke test: the public API answers with the anon key (RLS returns no rows when not signed in).
-$r = Invoke-WebRequest "$url/rest/v1/room?select=id&limit=1" -Headers @{ apikey = $anon } -UseBasicParsing
-Write-Host "REST check: HTTP $($r.StatusCode)"
+# Smoke test: auth answers with the anon key and reports sign-up off (table reads need a signed-in user).
+$s = Invoke-RestMethod "$url/auth/v1/settings" -Headers @{ apikey = $anon }
+Write-Host "Auth check: signup disabled = $($s.disable_signup), autoconfirm = $($s.mailer_autoconfirm)"
 Write-Host ''
 Write-Host "Done. URL: $url" -ForegroundColor Green
 Write-Host 'Next: .\scripts\create-owner.ps1 -Url <url> -ServiceKey <service key> -Name "Papa" -Phone 98xxxxxxxx'
